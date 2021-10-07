@@ -4,7 +4,7 @@ r(s, t) = rand(s:0.001:t)
 
 function strange(q, n, k, l, dotsize=.36, w=800.0)
     xmin = -2.0; xmax = 2.0; ymin= -2.0; ymax = 2.0
-    Drawing(w, w, "./././out/strange-vector$q.png")
+    Drawing(w, w, "./out/strange-vectors$q.png")
     origin()
     background("black")
     xinc = w / (xmax - xmin)
@@ -45,7 +45,7 @@ end
 
 function save(n)
     for c in 1:n
-        strange(c, rand(1:3),rand(1:3),rand(1:3), r(.32, .42), 200)
+        strange(1, rand(1:3),rand(1:3),rand(1:3), r(.32, .42), 200)
     end
 end
 

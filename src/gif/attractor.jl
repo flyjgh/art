@@ -99,7 +99,7 @@ function colorturn(frame_n, n::Int, k, l, dotsize, w)
     end
 end
 
-function turnmovie(w, nframes; fps=50)
+function turnmovie(w, nframes; fps, name="turnattract")
     mv = Movie(w, w, "mv")
     backg(scene, frame_n) = background("black")
     frame(scene, frame_n) = turnattract(frame_n, r(.32, .42), w)
@@ -107,11 +107,11 @@ function turnmovie(w, nframes; fps=50)
         Scene(mv, backg, 0:nframes),
         Scene(mv, frame, 0:nframes)],
         framerate = fps,
-        pathname = "out/turnattract.gif",
+        pathname = "out/$name.gif",
         creategif = true)
 end
 
-function colormovie(w, nframes; fps=50)
+function colormovie(w, nframes; fps, name="colorattract")
     mv = Movie(w, w, "mv")
     backg(scene, frame_n) = background("black")
     frame(scene, frame_n) = colorattract(frame_n, rand(1:3),rand(1:3),rand(1:3), r(.32, .42), w)
@@ -119,11 +119,11 @@ function colormovie(w, nframes; fps=50)
         Scene(mv, backg, 0:nframes),
         Scene(mv, frame, 0:nframes)],
         framerate = fps,
-        pathname = "out/colorattract.gif",
+        pathname = "out/$name.gif",
         creategif = true)
 end
 
-function colorturnmovie(w, nframes; fps=50)
+function colorturnmovie(w, nframes; fps, name="colorturnattract")
     mv = Movie(w, w, "mv")
     backg(scene, frame_n) = background("black")
     frame(scene, frame_n) = colorattract(frame_n, rand(1:3),rand(1:3),rand(1:3), r(.32, .42), w)
@@ -131,9 +131,9 @@ function colorturnmovie(w, nframes; fps=50)
         Scene(mv, backg, 0:nframes),
         Scene(mv, frame, 0:nframes)],
         framerate = fps,
-        pathname = "out/colorattract.gif",
+        pathname = "out/$name.gif",
         creategif = true)
 end
 
-colorturnmovie(128, 500, fps=45)
+colorturnmovie(1024, 500, fps=45)
 
