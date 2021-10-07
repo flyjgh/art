@@ -135,5 +135,5 @@ function colorturnmovie(w, nframes; fps, name="colorturnattract")
         creategif = true)
 end
 
-colorturnmovie(1024, 500, fps=45)
+turnmovie(1024, 500, fps=45)
 
