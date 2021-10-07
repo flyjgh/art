@@ -126,7 +126,7 @@ end
 function colorturnmovie(w, nframes; fps, name="colorturnattract")
     mv = Movie(w, w, "mv")
     backg(scene, frame_n) = background("black")
-    frame(scene, frame_n) = colorattract(frame_n, rand(1:3),rand(1:3),rand(1:3), r(.32, .42), w)
+    frame(scene, frame_n) = colorturn(frame_n, rand(1:3),rand(1:3),rand(1:3), r(.32, .42), w)
     animate(mv, [
         Scene(mv, backg, 0:nframes),
         Scene(mv, frame, 0:nframes)],
