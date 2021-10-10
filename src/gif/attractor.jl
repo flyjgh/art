@@ -202,4 +202,4 @@ function anim(ƒ::Tuple; epochs=1, quality=512, frames=500, fps=50, name="attr")
 end
 
 fun = (turnmovie, interferencemovie, colormovie, colorturnmovie)
-anim(fun, quality=1024, name="attr")
+anim(fun, quality=1024, name="attrr")
