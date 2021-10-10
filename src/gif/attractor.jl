@@ -180,12 +180,21 @@ function colorturnmovie(w, nframes; fps, name="colorturnattract")
         creategif = true)
 end
 
-colormovie(1024, 500, fps=45, name="color6")
+# colormovie(1024, 500, fps=45, name="color6")
 
-function anim(ƒ, epochs; quality=512, frames=500, fps=45, name="turnattract3")
+function anim(ƒ; epochs=1, quality=512, frames=500, fps=45, name="attr")
     for i ∈ 1:epochs
         ƒ(quality, frames, fps, name=name*"$i")
     end
 end
 
-anim(colorattract, 3, quality=1024, name="attr")
+function anim(ƒ::Tuple; epochs=1, quality=512, frames=500, fps=45, name="attr")
+    for i ∈ 1:epochs
+        for fun ∈ ƒ
+            fun(quality, frames, fps, name=name*"$i")
+        end
+    end
+end
+
+fun = (turnmoveie, interferencemovie, colormovie, colorturnmovie)
+anim(fun, quality=1024, name="attr")
