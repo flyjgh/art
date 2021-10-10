@@ -73,10 +73,10 @@ function turnattract(frame_n, dotsize, w)
     origin()
     background("black")
     # control parameters
-    a = 2.2 + (frame_n / rand(800:900))
-    b = .95 + (frame_n / rand(600:700))
-    c = -.15 + (frame_n / rand(900:1100))
-    d = -2.2 + (frame_n / rand(3500:4500))
+    a = 2.2 + (frame_n / 800)
+    b = .95 + (frame_n / 600)
+    c = -.15 + (frame_n / 1000)
+    d = -2.2 + (frame_n / 3500)
     e1 = 1.0
     x = y = z = 0.0
     wover2 = w / 2
@@ -104,10 +104,10 @@ function colorturn(frame_n, n::Int, k, l, dotsize, w)
     origin()
     background("black")
     # control parameters
-    a = 2.2 + (frame_n / rand(800:900))
-    b = .95 + (frame_n / rand(600:700))
-    c = -.15 + (frame_n / rand(900:1100))
-    d = -2.2 + (frame_n / rand(3500:4500))
+    a = 2.2 + (frame_n / 800)
+    b = .95 + (frame_n / 600)
+    c = -.15 + (frame_n / 1000)
+    d = -2.2 + (frame_n / 4000)
     e1 = 1.0
     x = y = z = 0.0
     wover2 = w / 2
