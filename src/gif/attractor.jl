@@ -132,7 +132,7 @@ function colorturn(frame_n, n::Int, k, l, dotsize, w)
     end
 end
 
-function turnmovie(w, nframes; fps, name="turnattract")
+function turnmovie(w, nframes, fps; name="turnattract")
     mv = Movie(w, w, "mv")
     backg(scene, frame_n) = background("black")
     frame(scene, frame_n) = turnattract(frame_n, r(.32, .42), w)
@@ -144,7 +144,7 @@ function turnmovie(w, nframes; fps, name="turnattract")
         creategif = true)
 end
 
-function interferencemovie(w, nframes; fps, name="turnattract")
+function interferencemovie(w, nframes, fps; name="turnattract")
     mv = Movie(w, w, "mv")
     backg(scene, frame_n) = background("black")
     frame(scene, frame_n) = interference(frame_n, rand(1:3),rand(1:3),rand(1:3), r(.32, .42), w)
@@ -156,7 +156,7 @@ function interferencemovie(w, nframes; fps, name="turnattract")
         creategif = true)
 end
 
-function colormovie(w, nframes; fps, name="colorattract")
+function colormovie(w, nframes, fps; name="colorattract")
     mv = Movie(w, w, "mv")
     backg(scene, frame_n) = background("black")
     frame(scene, frame_n) = colorattract(frame_n, rand(1:3),rand(1:3),rand(1:3), r(.32, .42), w)
@@ -168,7 +168,7 @@ function colormovie(w, nframes; fps, name="colorattract")
         creategif = true)
 end
 
-function colorturnmovie(w, nframes; fps, name="colorturnattract")
+function colorturnmovie(w, nframes, fps; name="colorturnattract")
     mv = Movie(w, w, "mv")
     backg(scene, frame_n) = background("black")
     frame(scene, frame_n) = colorturn(frame_n, rand(1:3),rand(1:3),rand(1:3), r(.32, .42), w)
@@ -182,13 +182,13 @@ end
 
 # colormovie(1024, 500, fps=45, name="color6")
 
-function anim(ƒ; epochs=1, quality=512, frames=500, fps=45, name="attr")
+function anim(ƒ; epochs=1, quality=512, frames=500, fps=50, name="attr")
     for i ∈ 1:epochs
         ƒ(quality, frames, fps, name=name*"$i")
     end
 end
 
-function anim(ƒ::Tuple; epochs=1, quality=512, frames=500, fps=45, name="attr")
+function anim(ƒ::Tuple; epochs=1, quality=512, frames=500, fps=50, name="attr")
     for i ∈ 1:epochs
         for fun ∈ ƒ
             fun(quality, frames, fps, name=name*"$i")
@@ -196,5 +196,5 @@ function anim(ƒ::Tuple; epochs=1, quality=512, frames=500, fps=45, name="attr")
     end
 end
 
-fun = (turnmoveie, interferencemovie, colormovie, colorturnmovie)
+fun = (turnmovie, interferencemovie, colormovie, colorturnmovie)
 anim(fun, quality=1024, name="attr")
