@@ -180,7 +180,7 @@ function colorturnmovie(w, nframes; fps, name="colorturnattract")
         creategif = true)
 end
 
-colormovie(1024, 500, fps=45, name="color5")
+colormovie(1024, 500, fps=45, name="color6")
 
 function anim(ƒ, epochs; quality=512, frames=500, fps=45, name="turnattract3")
     for i ∈ 1:epochs
