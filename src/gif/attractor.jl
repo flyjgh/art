@@ -2,7 +2,7 @@ using Luxor, Colors
 
 r(s, t) = rand(s:0.001:t)
 
-function interference(frame_n, n::Int, k, l, dotsize, w)
+function interference(frame_n, n::Int, k, l, dotsize, w, ran)
     xmin = -2.0; xmax = 2.0; ymin= -2.0; ymax = 2.0
     origin()
     background("black")
@@ -35,14 +35,14 @@ function interference(frame_n, n::Int, k, l, dotsize, w)
     end
 end
 
-function colorattract(frame_n, n::Int, k, l, dotsize, w)
+function colorattract(frame_n, n::Int, k, l, dotsize, w, ran)
     xmin = -2.0; xmax = 2.0; ymin= -2.0; ymax = 2.0
     origin()
     background("black")
     # control parameters
     a = 2.24
     b = .95 + (60 / frame_n)
-    c = -.15 + (frame_n / 600)
+    c = -.15 + (frame_n / 600 + ran)
     d = -2.2
     e1 = 1.0
     x = y = z = 0.0
@@ -68,15 +68,15 @@ function colorattract(frame_n, n::Int, k, l, dotsize, w)
     end
 end
 
-function turnattract(frame_n, dotsize, w)
+function turnattract(frame_n, dotsize, w, ran)
     xmin = -2.0; xmax = 2.0; ymin= -2.0; ymax = 2.0
     origin()
     background("black")
     # control parameters
-    a = 2.2 + (frame_n / 800)
-    b = .95 + (frame_n / 600)
-    c = -.15 + (frame_n / 1000)
-    d = -2.2 + (frame_n / 3500)
+    a = 2.2 + (frame_n / 800 + ran)
+    b = .95 + (frame_n / 600 + ran)
+    c = -.15 + (frame_n / 1000 + ran)
+    d = -2.2 + (frame_n / 3500 + ran)
     e1 = 1.0
     x = y = z = 0.0
     wover2 = w / 2
@@ -99,15 +99,15 @@ function turnattract(frame_n, dotsize, w)
     end
 end
 
-function colorturn(frame_n, n::Int, k, l, dotsize, w)
+function colorturn(frame_n, n::Int, k, l, dotsize, w, ran)
     xmin = -2.0; xmax = 2.0; ymin= -2.0; ymax = 2.0
     origin()
     background("black")
     # control parameters
-    a = 2.2 + (frame_n / 800)
-    b = .95 + (frame_n / 600)
-    c = -.15 + (frame_n / 1000)
-    d = -2.2 + (frame_n / 4000)
+    a = 2.2 + (frame_n / 800 + ran)
+    b = .95 + (frame_n / 600 + ran)
+    c = -.15 + (frame_n / 1000 + ran)
+    d = -2.2 + (frame_n / 4000 + ran)
     e1 = 1.0
     x = y = z = 0.0
     wover2 = w / 2
@@ -132,10 +132,10 @@ function colorturn(frame_n, n::Int, k, l, dotsize, w)
     end
 end
 
-function turnmovie(w, nframes, fps; name="turnattract")
+function turnmovie(w, nframes, fps; name="turnattract", ran)
     mv = Movie(w, w, "mv")
     backg(scene, frame_n) = background("black")
-    frame(scene, frame_n) = turnattract(frame_n, r(.32, .42), w)
+    frame(scene, frame_n) = turnattract(frame_n, r(.32, .42), w, ran)
     animate(mv, [
         Scene(mv, backg, 0:nframes),
         Scene(mv, frame, 0:nframes)],
@@ -144,10 +144,10 @@ function turnmovie(w, nframes, fps; name="turnattract")
         creategif = true)
 end
 
-function interferencemovie(w, nframes, fps; name="turnattract")
+function interferencemovie(w, nframes, fps; name="turnattract", ran)
     mv = Movie(w, w, "mv")
     backg(scene, frame_n) = background("black")
-    frame(scene, frame_n) = interference(frame_n, rand(1:3),rand(1:3),rand(1:3), r(.32, .42), w)
+    frame(scene, frame_n) = interference(frame_n, rand(1:3),rand(1:3),rand(1:3), r(.32, .42), w, ran)
     animate(mv, [
         Scene(mv, backg, 0:nframes),
         Scene(mv, frame, 0:nframes)],
@@ -156,10 +156,10 @@ function interferencemovie(w, nframes, fps; name="turnattract")
         creategif = true)
 end
 
-function colormovie(w, nframes, fps; name="colorattract")
+function colormovie(w, nframes, fps; name="colorattract", ran)
     mv = Movie(w, w, "mv")
     backg(scene, frame_n) = background("black")
-    frame(scene, frame_n) = colorattract(frame_n, rand(1:3),rand(1:3),rand(1:3), r(.32, .42), w)
+    frame(scene, frame_n) = colorattract(frame_n, rand(1:3),rand(1:3),rand(1:3), r(.32, .42), w, ran)
     animate(mv, [
         Scene(mv, backg, 0:nframes),
         Scene(mv, frame, 0:nframes)],
@@ -168,10 +168,10 @@ function colormovie(w, nframes, fps; name="colorattract")
         creategif = true)
 end
 
-function colorturnmovie(w, nframes, fps; name="colorturnattract")
+function colorturnmovie(w, nframes, fps; name="colorturnattract", ran)
     mv = Movie(w, w, "mv")
     backg(scene, frame_n) = background("black")
-    frame(scene, frame_n) = colorturn(frame_n, rand(1:3),rand(1:3),rand(1:3), r(.32, .42), w)
+    frame(scene, frame_n) = colorturn(frame_n, rand(1:3),rand(1:3),rand(1:3), r(.32, .42), w, ran)
     animate(mv, [
         Scene(mv, backg, 0:nframes),
         Scene(mv, frame, 0:nframes)],
@@ -184,14 +184,16 @@ end
 
 function anim(ƒ; epochs=1, quality=512, frames=500, fps=50, name="attr")
     for i ∈ 1:epochs
-        ƒ(quality, frames, fps, name=name*"$i")
+        ran = rand(-200:200)
+        ƒ(quality, frames, fps, name=name*"$i", ran=ran)
     end
 end
 
 function anim(ƒ::Tuple; epochs=1, quality=512, frames=500, fps=50, name="attr")
     for i ∈ 1:epochs
         for fun ∈ ƒ
-            fun(quality, frames, fps, name=name*"$i")
+            ran = rand(-200:200)
+            fun(quality, frames, fps, name=name*"$i", ran=ran)
         end
     end
 end
